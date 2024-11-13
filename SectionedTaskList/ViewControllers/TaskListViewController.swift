@@ -77,5 +77,41 @@ final class TaskListViewController: UITableViewController {
         let taskList = taskLists[indexPath.row]
         taskVC.taskList = taskList
     }
+    
+    @IBAction func sortingList(_ sender: UISegmentedControl) {
+    }
+    
+    @objc private func addButtonPressed() {
+        showAlert()
+    }
 }
 
+
+// MARK: - AlertController
+extension TaskListViewController {
+    private func showAlert(with taskList: TaskList? = nil, completion: (() -> Void)? = nil) {
+        let alertBuilder = AlertControllerBuilder(
+            title: taskList != nil ? "Update List" : "Save List",
+            message: "Please set title for new task list"
+        )
+        
+        alertBuilder
+            .setTextField(withPlaceholder: "List title", andText: taskList?.title)
+            .addAction(title: taskList != nil ? "Update List" : "Save List", style: .default) { [unowned self] newValue, _ in
+                if let taskList, let completion {
+                    storageManager.edit(taskList, newVelue: newValue)
+                    completion()
+                    return
+                }
+                createTaskList(withTitle: newValue)
+            }
+            .addAction(title: "Cancel", style: .destructive)
+        
+        let alertController = alertBuilder.build()
+        present(alertController, animated: true)
+    }
+    
+    private func createTaskList(withTitle title: String) {
+        
+    }
+}

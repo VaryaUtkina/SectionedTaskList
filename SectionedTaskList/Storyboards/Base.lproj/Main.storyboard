@@ -40,6 +40,9 @@
                                 <segment title="Date"/>
                                 <segment title="A-Z"/>
                             </segments>
+                            <connections>
+                                <action selector="sortingList:" destination="syu-Mq-LKL" eventType="valueChanged" id="7EP-jd-J2J"/>
+                            </connections>
                         </segmentedControl>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" textLabel="gjn-Ci-lxY" detailTextLabel="0LM-Wb-XPD" style="IBUITableViewCellStyleValue1" id="HIN-xQ-39p">
