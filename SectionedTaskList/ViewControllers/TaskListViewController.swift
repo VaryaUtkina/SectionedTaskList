@@ -72,7 +72,10 @@ final class TaskListViewController: UITableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        <#code#>
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        guard let taskVC = segue.destination as? TaskDetailsViewController else { return }
+        let taskList = taskLists[indexPath.row]
+        taskVC.taskList = taskList
     }
 }
 

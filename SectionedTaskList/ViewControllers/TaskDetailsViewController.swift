@@ -9,4 +9,6 @@ import UIKit
 
 final class TaskDetailsViewController: UITableViewController {
     
+    var taskList: TaskList!
+    
 }
