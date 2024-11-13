@@ -11,6 +11,7 @@ final class TaskListViewController: UITableViewController {
 
     private var taskLists: [TaskList]!
     private let storageManager = StorageManager.shared
+    private let dataManager = DataManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ final class TaskListViewController: UITableViewController {
         navigationItem.rightBarButtonItem = addButton
         navigationItem.leftBarButtonItem = editButtonItem
         
+        createTempData()
         taskLists = storageManager.fetchTaskList()
     }
 
@@ -83,6 +85,15 @@ final class TaskListViewController: UITableViewController {
     
     @objc private func addButtonPressed() {
         showAlert()
+    }
+    
+    private func createTempData() {
+        if !UserDefaults.standard.bool(forKey: "done") {
+            dataManager.createTempData { [unowned self] in
+                UserDefaults.standard.set(true, forKey: "done")
+                tableView.reloadData()
+            }
+        }
     }
 }
 

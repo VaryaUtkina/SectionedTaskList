@@ -18,7 +18,6 @@ final class StorageManager {
     }
     
     func save(_ taskLists: [TaskList]) {
-        
     }
     
     func save(_ taskList: String, completion: (TaskList) -> Void) {
