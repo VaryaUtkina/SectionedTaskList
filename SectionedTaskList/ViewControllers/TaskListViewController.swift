@@ -49,6 +49,30 @@ final class TaskListViewController: UITableViewController {
             storageManager.delete(taskList)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [unowned self] _, _, isDone in
+            showAlert(with: taskList) {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            isDone(true)
+        }
+        
+        let doneAction = UIContextualAction(style: .normal, title: "Done") { [unowned self] _, _, isDone in
+            storageManager.done(taskList)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            isDone(true)
+        }
+        
+        editAction.backgroundColor = .orange
+        doneAction.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+        
+        
+        return UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        <#code#>
     }
 }
 
